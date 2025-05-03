@@ -27,7 +27,7 @@ module.exports.showListing = async (req, res) => {
         .populate("owner");
 
       if(!listing) {
-        req.flash("error", "Listing you requested for does not exist!");
+        req.flash("error", "Airbnb you requested for does not exist!");
         res.redirect("/listings");
       } 
       // console.log(listing);
@@ -48,7 +48,7 @@ module.exports.createListing = async (req, res, next) => {
 
     await newListing.save();
 
-    req.flash("success", "New Listing created!");
+    req.flash("success", "New Airbnb created!");
 
     res.redirect("/listings");
 };
@@ -60,7 +60,7 @@ module.exports.renderEditForm =  async (req, res) => {
     const listing = await Listing.findById(id);
 
     if(!listing) {
-      req.flash("error", "Listing you requested for does not exist!");
+      req.flash("error", "Airbnb you requested for does not exist!");
       res.redirect("/listings");
     }
 
@@ -83,7 +83,7 @@ module.exports.updateListing = async (req, res) => {
       await listing.save();
     }
     
-    req.flash("success", "Listing Updated!");
+    req.flash("success", "Airbnb Updated!");
 
     res.redirect(`/listings/${id}`);
 };
@@ -95,7 +95,7 @@ module.exports.destroyListing =  async (req, res) => {
       let deletedListing = await Listing.findByIdAndDelete(id);
       console.log(deletedListing);
 
-      req.flash("success", "Listing Deleted!");
+      req.flash("success", "Airbnb Deleted!");
 
       res.redirect("/listings");
 };
