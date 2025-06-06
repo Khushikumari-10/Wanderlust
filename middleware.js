@@ -1,10 +1,9 @@
 const Listing = require("./models/listing");
 const Review = require("./models/review");
 const ExpressError = require("./utils/ExpressError.js");
-const { listingSchema, reviewSchema } = require("./schema.js");  //requiring joi schema
+const { listingSchema, reviewSchema } = require("./schema.js");  
 
 module.exports.isLoggedIn = (req, res, next) => {
-    // console.log(req.user);
 
     if(!req.isAuthenticated()) {
         req.session.redirectUrl = req.originalUrl;
@@ -31,8 +30,7 @@ module.exports.isOwner = async(req, res, next) => {
     next();
 };
 
-//validation for schema(middleware)
-//for Listing
+
 module.exports.validateListing = (req, res, next) => {
   let { error } = listingSchema.validate(req.body);
   if (error) {
@@ -44,8 +42,6 @@ module.exports.validateListing = (req, res, next) => {
 };
 
 
-//validation for schema(middleware)
-//for Review
 module.exports.validateReview = (req, res, next) => {
     let { error } = reviewSchema.validate(req.body);
     if (error) {

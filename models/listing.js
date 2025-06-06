@@ -9,13 +9,6 @@ const listingSchema = new Schema({
     },
     description: String,
     image: {
-      // type: String,
-      // default: "https://unsplash.com/photos/mountains-stars-and-lake-reflect-in-a-beautiful-nightscape-aCusqffy5sY",
-      // set: (v) => 
-      //   v === "" 
-      //     ? "https://unsplash.com/photos/mountains-stars-and-lake-reflect-in-a-beautiful-nightscape-aCusqffy5sY" 
-      //     : v,
-
       url: String,
       filename: String,
     },
@@ -32,14 +25,9 @@ const listingSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: "User",
       },
-      // category: {
-      //   type: String,
-      //   enum: ["mountains", "arctic", "farms", "dessert"],
-      // },
 });
 
 
-//delete all reviews from review schema related to that listing(when the listing is deleted)
 listingSchema.post("findOneAndDelete", async (listing) => {
   if(listing) {
     await Review.deleteMany({ _id: { $in: listing.reviews } });

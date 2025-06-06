@@ -1,6 +1,3 @@
-//Express Router
-//Restructuring Listings
-
 const express = require("express");
 const router = express.Router();
 const wrapAsync = require("../utils/wrapAsync.js");
@@ -10,13 +7,6 @@ const listingController = require("../controllers/listing.js");
 const multer  = require('multer')
 const { storage } = require("../cloudConfig.js");
 const upload = multer({ storage });
-
-
-
-// //Index Route
-// router.get("/", wrapAsync(listingController.index));
-// //Create Route
-// router.post("/", isLoggedIn, validateListing, wrapAsync(listingController.createListing));
 
 router
     .route("/")
@@ -31,13 +21,6 @@ router
 
 //New Route
 router.get("/new", isLoggedIn, listingController.renderNewForm);
-
-// //Show Route
-// router.get("/:id", wrapAsync(listingController.showListing));
-// //Update Route
-// router.put("/:id", isLoggedIn, isOwner, validateListing, wrapAsync(listingController.createListing));
-// //Delete Route
-// router.delete("/:id", isLoggedIn, isOwner, wrapAsync(listingController.destroyListing));
 
 router
     .route("/:id")

@@ -1,7 +1,5 @@
 const User = require("../models/user");
 
-
-
 module.exports.renderSignupForm = (req, res) => {
     res.render("users/signup.ejs");
 };
@@ -12,8 +10,7 @@ module.exports.signup = async(req, res) => {
       const newUser = new User({ email, username });    
       const registeredUser = await User.register(newUser, password);
       console.log(registeredUser);
-      //Passport's login method automatically establises a login session.
-      //we can invoke login to automatically login a user.
+      
       req.login(registeredUser, (err) => {
           if (err) {
               return next(err);
